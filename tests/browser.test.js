@@ -35,26 +35,26 @@ describe('Clicking "Pusha till stacken"', () => {
 
 describe('Clicking on the "Vad finns överst på stacken?" after popping an item', () => {
 	it('should show the correct item on top of the stack', async () => {
-		let push, alert;
+		let pushButton, popButton, peekButton, alert;
         
-        push = await driver.findElement(By.id('push'));
-		await push.click();
+        pushButton = await driver.findElement(By.id('push'));
+        popButton = await driver.findElement(By.id('pop'));
+        peekButton = await driver.findElement(By.id('peek'));
+
+		await pushButton.click();
 		alert = await driver.switchTo().alert();
 		await alert.sendKeys("Hund");
 		await alert.accept();
 
-        push = await driver.findElement(By.id('push'));
-		await push.click();
+		await pushButton.click();
 		alert = await driver.switchTo().alert();
 		await alert.sendKeys("Katt");
 		await alert.accept();
 
-        let popButton = await driver.findElement(By.id('pop'));
 		await popButton.click();
         alert = await driver.switchTo().alert();
         await alert.accept();
 
-        let peekButton = await driver.findElement(By.id('peek'));
         await peekButton.click();
 
         let stack = await driver.findElement(By.id('top_of_stack')).getText();
