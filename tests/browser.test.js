@@ -54,7 +54,10 @@ describe('Clicking on the "Vad finns överst på stacken?" after popping an item
         alert = await driver.switchTo().alert();
         await alert.accept();
 
+        let peekButton = await driver.findElement(By.id('peek'));
+        await peekButton.click();
+
         let stack = await driver.findElement(By.id('top_of_stack')).getText();
-        expect(stack).toEqual("Hund"); // will fail as we havent pressed the peek button
+        expect(stack).toEqual("Hund");
 	});
 });
